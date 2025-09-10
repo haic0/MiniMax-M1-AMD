@@ -151,6 +151,36 @@ cd vllm/
 pip install -e .
 ```
 
+### AMD GPU Support
+
+### Please follow the steps here to install and run LongCat-Flash-Chat models on AMD MI300X GPU.
+### Step By Step Guide
+#### Step 1
+Launch the Rocm-vllm docker:
+
+```shell
+docker pull rocm/vllm-dev:nightly
+
+docker run -d -it --ipc=host --network=host --privileged --cap-add=CAP_SYS_ADMIN --device=/dev/kfd --device=/dev/dri --device=/dev/mem --group-add video --cap-add=SYS_PTRACE --security-opt seccomp=unconfined -v /:/work -e SHELL=/bin/bash  --name vllm_minimax rocm/vllm-dev:nightly
+```
+
+#### Step 2
+  Huggingface login
+
+```shell
+   huggingface-cli login 
+```   
+
+
+#### Step 3
+Run the vllm online serving
+Sample Command
+
+```shell
+SAFETENSORS_FAST_GPU=1 VLLM_USE_V1=0 vllm serve MiniMaxAI/MiniMax-M1-80k -tp 8 --gpu-memory-utilization 0.95 --no-enable-prefix-caching --trust-remote-code   --max_model_len 4096 --dtype bfloat16
+```
+
+
 ## 📮 Getting Support
 
 If you encounter any issues while deploying MiniMax-M1 model:

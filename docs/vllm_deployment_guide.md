@@ -152,8 +152,7 @@ pip install -e .
 ```
 
 ### AMD GPU Support
-
-### Please follow the steps here to install and run LongCat-Flash-Chat models on AMD MI300X GPU.
+### Please follow the steps here to install and run MiniMax-M1 models on AMD MI300X GPU.
 ### Step By Step Guide
 #### Step 1
 Launch the Rocm-vllm docker:
